@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\type;
 
 class ProjectController extends Controller
 {
@@ -30,7 +31,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all();
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -44,6 +46,7 @@ class ProjectController extends Controller
         // dd($request->all());
         // dd($request)->validated();
         $form_data = $request->validated();
+        // dd($form_data);
         // $form_data['slug'] = Str::slug($form_data['title']);
         $form_data['slug'] = Project::generateSlug($form_data['title']);
         // $project = new Project();
@@ -53,7 +56,7 @@ class ProjectController extends Controller
         if (array_key_exists('image', $form_data)) {
             // if ($request->hasFile('cover_image'))
             $path = Storage::put('post_image', $request->cover_image);
-            dd($path);
+            // dd($path);
             $form_data['image'] = $path;
         }
 

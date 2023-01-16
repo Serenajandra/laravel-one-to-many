@@ -12,21 +12,30 @@
         @endif
         <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
+            <div class="form-group mt-4">
                 <label for="title">Titolo</label>
                 <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}">
             </div>
-            <div class="form-group">
+            <div class="form-group mt-4">
                 <label for="subject">Argomenti</label>
                 <input type="text" name="subject" id="subject" class="form-control" value="{{ old('subject') }}">
             </div>
-            <div class="form-group">
+            <div class="form-group mt-4">
                 <label for="presentation">Presentazione</label>
                 <input type="text" name="presentation" id="presentation" class="form-control"
                     value="{{ old('presentation') }}">
             </div>
-            <div class="form-group">
-                <label for="image">immagine</label>
+            <div class="form-group mt-4">
+                <label for="type">Tipologia</label>
+                <select name="type_id" id="type" class="form-select">
+                    <option value="">Altra tipologia</option>
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}">{{ $type->type }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group mt-4">
+                <label for="image">Immagine</label>
                 <input type="file" name="image" id="image" class="form-control">
             </div>
             <div class="form-group">

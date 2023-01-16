@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Mockery\Matcher\Type;
-use illuminate\Support\Str;
+use App\Models\type;
+use Illuminate\Support\Str;
 
 class typeSeeder extends Seeder
 {
@@ -21,6 +21,7 @@ class typeSeeder extends Seeder
             $New_type = new Type();
             $New_type->type = $type;
             $New_type->slug = Str::slug($type);
+            $New_type->save();
         }
     }
 }
